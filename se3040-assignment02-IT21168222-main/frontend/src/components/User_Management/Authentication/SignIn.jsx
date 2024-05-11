@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { auth } from "./firebase-config";
 
-function SignIn() {
+function SignIn({ onSignIn }) {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [user, setUser] = useState(null);
@@ -51,40 +51,37 @@ function SignIn() {
     <>
       <style>{styles}</style>
       <div>
-        <div className="background">
-          <div className="shape"></div>
-          <div className="shape"></div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <form onSubmit={login}>
+            <h3>Login Here</h3>
+
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              placeholder="Email..."
+              value={loginEmail}
+              onChange={(event) => {
+                setLoginEmail(event.target.value);
+              }}
+              id="email"
+              required
+            />
+
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              placeholder="Password..."
+              value={loginPassword}
+              onChange={(event) => {
+                setLoginPassword(event.target.value);
+              }}
+              id="password"
+              required
+            />
+            <br />
+            <button type="submit">Log In</button>
+          </form>
         </div>
-        <form onSubmit={login}>
-          <h3>Login Here</h3>
-
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            placeholder="Email..."
-            value={loginEmail}
-            onChange={(event) => {
-              setLoginEmail(event.target.value);
-            }}
-            id="email"
-            required
-          />
-
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            placeholder="Password..."
-            value={loginPassword}
-            onChange={(event) => {
-              setLoginPassword(event.target.value);
-            }}
-            id="password"
-            required
-          />
-          <br />
-          <button type="submit">Log In</button>
-        </form>
-
       </div>
     </>
   );
@@ -136,18 +133,17 @@ body {
 }
 
 form {
-    height: 520px;
-    width: 400px;
-    background-color: rgba(255, 255, 255, 0.13);
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-    padding: 50px 35px;
+  margin: 65px;
+  height: 520px;
+  width: 400px;
+  background-color: rgba(255, 255, 255, 0.13);
+  position: relative;
+  top: 80%;
+  border-radius: 10px;
+  backdrop-filter: blur(3px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  padding: 50px 35px;
 }
 
 form * {

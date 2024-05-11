@@ -1,38 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-function Home() {
+function headerHome() {
 
   return (
     <>
     <style>{styles}</style>
-    
+    <div className="home">
       <header>
         <h1>Welcome to NASA Explorer!</h1>
         <p>Explore the wonders of space with real-time data from NASA's APIs.</p>
       </header>
-      <div className="home">
-      <section className="section">
-        <h2>Explore Mars Rovers</h2>
-        <p>Discover the latest images and information from NASA's Mars rovers.</p>
-        <Link to="/mars-rover">
-          <img src="https://scitechdaily.com/images/SHERLOC-NASA-Perseverance-Mars-Rover-777x437.jpg" alt="Mars Rover Image" />
-        </Link>
-      </section>
-      <section className="section">
-        <h2>Astronomy Picture of the Day</h2>
-        <p>Experience the universe through stunning imagery captured by NASA's telescopes.</p>
-        <Link to="/astronomy-picture">
-          <img src="https://futurism.com/_next/image?url=https%3A%2F%2Fwp-assets.futurism.com%2F2015%2F11%2Feso1403a1.jpg&w=1080&q=75" alt="Astronomy Picture" />
-        </Link>
-      </section>
-      <section className="section">
-        <h2>Wildfire Tracker</h2>
-        <p>Stay informed about wildfires around the world with data from NASA satellites.</p>
-        <Link to="/wildfire-tracker">
-          <img src="https://www.politico.com/dims4/default/f4696a0/2147483647/strip/true/crop/1160x773+0+0/resize/630x420!/quality/90/?url=https%3A%2F%2Fstatic.politico.com%2F49%2F30%2F69e87ad546368fbd3a4020c30e25%2Fap21217249136497-1.jpg" alt="Wildfire Image" />
-        </Link>
-      </section>
     </div>
     </>
   );
@@ -50,8 +27,7 @@ const styles = `
 }
 
 header {
-  margin-top: 2px;
-  padding-top: 70px;
+  padding-top: 50px;
   text-align: center;
   height:40vh;
   color:white;
@@ -132,4 +108,4 @@ header {
 }
 `
 
-export default Home;
+export default headerHome;

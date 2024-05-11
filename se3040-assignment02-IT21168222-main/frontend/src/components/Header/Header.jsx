@@ -1,37 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
-function Header() {
+function Header({ onSignOut }) {
 
-  // const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   // Retrieve user data from local storage
-  //   const userData = localStorage.getItem("user");
-  //   if (userData) {
-  //     setUser(JSON.parse(userData));
-  //   }
-  // }, []);
   useEffect(() => {
-    // Create a link element
-    const link = document.createElement('link');
-    link.href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css';
-    link.rel = 'stylesheet';
-
-    // Append the link element to the document head
-    document.head.appendChild(link);
-
-    // Clean up function to remove the link element when the component unmounts
-    return () => {
-      document.head.removeChild(link);
-    };
+    const userFromLocalStorage = localStorage.getItem("user");
+    if (userFromLocalStorage) {
+      setUser(JSON.parse(userFromLocalStorage));
+    }
   }, []);
+
+  const handleSignOut = () => {
+    onSignOut();
+  };
 
 
   return (
     <>
       <style>{styles}</style>
-      <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#32174d' }}>
+      <nav className="navbar navbar-expand-lg nav-bg">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
             <img src="./src/assets/logo1.png" height="75" alt="" />
@@ -56,11 +45,20 @@ function Header() {
             </ul>
           </div>
         </div>
-        
-        <div class="header">
-          <div class="header-right">
-            <a class="active" href="/SignUp">Sign Up</a>
-            <a class="active" href="/SignIn">Sign In</a>
+
+        <div className="header">
+          <div className="header-right">
+            {user ? (
+              <>
+                <span className="welcome-msg">Welcome, {user.email}!</span>
+                <button className="btnStyle" onClick={handleSignOut} >Sign Out</button>
+              </>
+            ) : (
+              <>
+                <a className="active" href="/SignUp">Sign Up</a>
+                <a className="active" href="/SignIn"> Sign In </a>
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -73,7 +71,20 @@ function Header() {
 
 const styles = `
 
+/* Style for the welcome message */
+.welcome-msg {
+  color: white;
+  margin-right: 20px; /* Add some space between the welcome message and the sign out link */
+}
 
+/* Style for the sign out link */
+.header-right a.active {
+  margin-left: 20px; /* Add some space between the welcome message and the sign out link */
+}
+
+.nav-bg {
+  background-color: #0e101b;
+}
 
 .header {
   overflow: hidden;
@@ -85,11 +96,14 @@ const styles = `
   float: left;
   color: black;
   text-align: center;
-  padding: 12px;
+  padding: 5px 12px;
+  margin-left: 20px;
   text-decoration: none;
   font-size: 18px; 
   line-height: 25px;
   border-radius: 4px;
+  background: radial-gradient(56.39% 208.65% at 50% 50%, rgb(30, 144, 255) 0%, rgb(18, 119, 217) 100%);
+  box-shadow: rgba(3, 3, 3, 0.24) 0px 2px 12px 0px, rgb(30, 144, 255) 0px 1px 1px 0px inset;
 }
 
 .header a.logo {
@@ -101,6 +115,10 @@ const styles = `
   background-color: #ddd;
   color: black;
 }
+.btnStyle{
+  background-color: #ddd;
+  color: black;
+}
 
 .header a.active {
   background-color: dodgerblue;
@@ -109,6 +127,7 @@ const styles = `
 
 .header-right {
   float: right;
+  margin-right: 20px;
 }
 
 @media screen and (max-width: 500px) {
@@ -132,6 +151,7 @@ html{
 
 .btn{
     border: none;
+
 }
 
 

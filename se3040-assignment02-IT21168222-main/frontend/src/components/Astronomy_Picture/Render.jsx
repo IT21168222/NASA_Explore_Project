@@ -35,6 +35,7 @@ function Render() {
 
 
 const styles = `
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -43,6 +44,7 @@ const styles = `
   color: rgb(255, 255, 255);
   background-color: #030615;
   font-synthesis: none;
+  min-height: 100vh;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -66,11 +68,7 @@ const styles = `
   object-fit: cover;
 }
 
-#root {
-  min-height: 100vh;
-  display: flex;
-  display: relative;
-}
+
 
 footer {
   position: fixed;
