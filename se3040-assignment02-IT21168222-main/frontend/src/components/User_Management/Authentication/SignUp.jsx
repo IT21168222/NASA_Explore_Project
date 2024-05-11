@@ -44,11 +44,12 @@ function SignUp() {
     <>
     <style>{styles}</style>
     <div>
-      <div className="background">
+      {/* <div className="background">
         <div className="shape"></div>
         <div className="shape"></div>
-      </div>
-      <form onSubmit={register}> {/* Add onSubmit event handler */}
+      </div> */}
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <form onSubmit={register} > {/* Add onSubmit event handler */}
         <h3>Register Here</h3>
 
         <label htmlFor="email">Email</label>
@@ -67,6 +68,7 @@ function SignUp() {
         <br />
         <button type="submit">Register</button>
       </form>
+      </div>
     </div>
     </>
   );
@@ -106,27 +108,28 @@ body {
     background: linear-gradient(#1845ad,
             #23a2f6);
     left: -80px;
-    top: -80px;
+    top: 80px;
+    z-index: -9999;
 }
 
 .shape:last-child {
     background: linear-gradient(to right,
             #ff512f,
             #f09819);
-    right: -30px;
-    bottom: -80px;
+    right: -2px;
+    bottom: -100px;
+    z-index: -9999;
 }
 
 form {
+    margin: 65px;
     height: 520px;
     width: 400px;
     background-color: rgba(255, 255, 255, 0.13);
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
+    position: relative;
+    top: 80%;
     border-radius: 10px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(3px);
     border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
     padding: 50px 35px;
