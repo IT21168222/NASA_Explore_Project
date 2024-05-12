@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
 import { auth } from "./firebase-config";
+import Swal from 'sweetalert2';
 
 function SignIn({ onSignIn }) {
+  const navigate = useNavigate();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [user, setUser] = useState(null);
@@ -34,17 +37,27 @@ function SignIn({ onSignIn }) {
         loginPassword
       )
       setUser(userCredential.user);
+      Swal.fire({
+        icon: 'success',
+        title: 'Login successful!',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => navigate("/")).then(() => { window.location.reload(true); });
       setError(null);
       // alert("Login successful");
 
     } catch (error) {
       setError(error.message);
-      console.log(error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error.message
+      });
     }
   };
 
   const logout = async () => {
-    await signOut(auth);
+    await signOut(auth);    
   };
 
   return (
@@ -79,7 +92,7 @@ function SignIn({ onSignIn }) {
               required
             />
             <br />
-            <button type="submit">Log In</button>
+            <button type="submit" className="my">Log In</button>
           </form>
         </div>
       </div>
@@ -184,7 +197,7 @@ input {
     color: #e5e5e5;
 }
 
-button {
+.my {
     margin-top: 50px;
     width: 100%;
     background-color: #ffffff;
