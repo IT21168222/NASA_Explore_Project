@@ -1,10 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "./firebase-config";
+import Swal from 'sweetalert2';
+// import { useHistory } from 'react-router-dom';
 
 function SignUp() {
+  const navigate = useNavigate();
+  // const history = useHistory();
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -33,10 +38,21 @@ function SignUp() {
         registerPassword
       );
       console.log("User :" + user);
-      alert("success");
+      Swal.fire({
+        icon: 'success',
+        title: 'Registration successful! Please Sign in!',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => navigate("/SignIn"));
+      // history.push('/SignIn');
+
     } catch (error) {
       console.log(error.message);
-      alert("error");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error.message
+      });
     }
   };
 
@@ -66,7 +82,7 @@ function SignUp() {
           id="password" />
           {passwordError && <p className="error">{passwordError}</p>}
         <br />
-        <button type="submit">Register</button>
+        <button type="submit" className="my">Register</button>
       </form>
       </div>
     </div>
@@ -173,7 +189,7 @@ input {
     color: #e5e5e5;
 }
 
-button {
+.my {
     margin-top: 50px;
     width: 100%;
     background-color: #ffffff;

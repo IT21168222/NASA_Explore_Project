@@ -14,6 +14,7 @@ function Header({ onSignOut }) {
 
   const handleSignOut = () => {
     onSignOut();
+    window.location.reload(true);
   };
 
 
@@ -71,6 +72,11 @@ function Header({ onSignOut }) {
 
 const styles = `
 
+.navbar-nav .nav-item .nav-link:hover {
+  background-color: none;
+  color: lightblue !important;
+}
+
 /* Style for the welcome message */
 .welcome-msg {
   color: white;
@@ -112,12 +118,14 @@ const styles = `
 }
 
 .header a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: blue;
+  color: blue !important;
 }
 .btnStyle{
-  background-color: #ddd;
+  background-color: dodgerblue;
   color: black;
+  padding: 5px;
+  border-radius:5px;
 }
 
 .header a.active {

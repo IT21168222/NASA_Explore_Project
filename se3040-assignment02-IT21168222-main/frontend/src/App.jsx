@@ -49,7 +49,7 @@ function App() {
 
       </BrowserRouter>
 
-      <Footer/>
+     <Footer shouldDisplayFooter={!window.location.pathname.includes('/astronomy-picture')} />
 
 
     </>
